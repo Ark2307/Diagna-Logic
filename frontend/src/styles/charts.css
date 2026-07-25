@@ -1,0 +1,28 @@
+/**
+ * Chart color tokens — the dataviz skill's validated 3-slot categorical
+ * palette (blue/orange/aqua), which passes CVD-separation and normal-vision
+ * checks for a 3-series chart in both light and dark mode (see
+ * `node scripts/validate_palette.js` output referenced in dashboard-page).
+ * Kept as plain CSS custom properties (not Tailwind @theme tokens) since
+ * they're consumed directly by recharts' `fill`/`stroke` props, not via
+ * Tailwind utility classes.
+ */
+:root {
+    --chart-series-1: #2a78d6; /* blue */
+    --chart-series-2: #eb6834; /* orange */
+    --chart-series-3: #1baf7a; /* aqua */
+    --chart-neutral: #d1d5db; /* gray-300 — for "not attributed" / absence states */
+    --chart-grid: #e5e7eb; /* gray-200 — axis/gridlines, recessive */
+    --chart-tooltip-bg: #ffffff;
+    --chart-tooltip-border: #e5e7eb;
+}
+
+.dark-mode {
+    --chart-series-1: #3987e5;
+    --chart-series-2: #d95926;
+    --chart-series-3: #199e70;
+    --chart-neutral: #4b5563; /* gray-600 */
+    --chart-grid: #374151; /* gray-700 */
+    --chart-tooltip-bg: #1f2937;
+    --chart-tooltip-border: #374151;
+}
