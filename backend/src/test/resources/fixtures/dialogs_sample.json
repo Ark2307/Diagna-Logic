@@ -1,0 +1,466 @@
+[
+  {
+    "_id": "004ac02783ba442e8eeb307ea45ee97c",
+    "meetingId": "Bmr019",
+    "split": "TRAIN",
+    "corpus": "ICSI",
+    "domain": "ACADEMIC",
+    "turnCount": 10,
+    "turns": [
+      {
+        "turnIndex": 0,
+        "query": "What did Professor B recommend to do during the discussion of digits?",
+        "response": "Professor B recommended running a test to determine whether the SRI system would show improvement if trained on TI digits, and to compare the results to the system trained on Switchboard data.",
+        "queryType": "SPECIFIC",
+        "unanswerable": false,
+        "contextDependent": false,
+        "attributionRanges": [
+          {
+            "startIndex": 108,
+            "endIndex": 108
+          },
+          {
+            "startIndex": 118,
+            "endIndex": 118
+          },
+          {
+            "startIndex": 189,
+            "endIndex": 189
+          },
+          {
+            "startIndex": 224,
+            "endIndex": 224
+          },
+          {
+            "startIndex": 327,
+            "endIndex": 327
+          }
+        ],
+        "attributedSegmentCount": 5
+      },
+      {
+        "turnIndex": 1,
+        "query": "Did the lapel microphone perform worse than expected?",
+        "response": "No, the lapel microphone performed better than expected. Although Professor B initially believed it would perform the worst due to the breath noises and clothes rustling, it actually had a very high-quality microphone.",
+        "queryType": "YES_NO",
+        "unanswerable": false,
+        "contextDependent": false,
+        "attributionRanges": [
+          {
+            "startIndex": 68,
+            "endIndex": 68
+          },
+          {
+            "startIndex": 73,
+            "endIndex": 76
+          }
+        ],
+        "attributedSegmentCount": 5
+      },
+      {
+        "turnIndex": 2,
+        "query": "Did they decide to use the Switchboard model as the starting point for their speaker adaptation?",
+        "response": "Yes, they decided to use the Switchboard model as the starting point for their speaker adaptation, but they would also adapt the models to the room acoustics.",
+        "queryType": "YES_NO",
+        "unanswerable": false,
+        "contextDependent": false,
+        "attributionRanges": [
+          {
+            "startIndex": 219,
+            "endIndex": 224
+          }
+        ],
+        "attributedSegmentCount": 6
+      },
+      {
+        "turnIndex": 3,
+        "query": "What did they decide to do about the PDA?",
+        "response": "The participant discussed about the topic PDA in the meeting but did not come to the conclusion.",
+        "queryType": "SPECIFIC",
+        "unanswerable": false,
+        "contextDependent": false,
+        "attributionRanges": [
+          {
+            "startIndex": 364,
+            "endIndex": 367
+          },
+          {
+            "startIndex": 377,
+            "endIndex": 381
+          }
+        ],
+        "attributedSegmentCount": 9
+      },
+      {
+        "turnIndex": 4,
+        "query": "What did they decide to do with the lapel microphone?",
+        "response": "The participant discussed about the topic lapel microphone in the meeting but did not make any decision.",
+        "queryType": "SPECIFIC",
+        "unanswerable": false,
+        "contextDependent": false,
+        "attributionRanges": [
+          {
+            "startIndex": 68,
+            "endIndex": 68
+          },
+          {
+            "startIndex": 73,
+            "endIndex": 76
+          }
+        ],
+        "attributedSegmentCount": 5
+      },
+      {
+        "turnIndex": 5,
+        "query": "What benefit did the lapel microphone provide that made it perform better than expected?",
+        "response": "Lapel microphone had a very high-quality microphone. It picks up other people's speakers other people's talking is an indication of that it the fact it is a good microphone. Some advantages to it in terms of breath noises and clothes rustling if no one else is talking.",
+        "queryType": "SPECIFIC",
+        "unanswerable": false,
+        "contextDependent": false,
+        "attributionRanges": [
+          {
+            "startIndex": 68,
+            "endIndex": 86
+          }
+        ],
+        "attributedSegmentCount": 19
+      },
+      {
+        "turnIndex": 6,
+        "query": "Can you give me a summary of what PhD F said during the meeting?",
+        "response": "* PhD F confirmed that the SRI digit recognition system outperforms the HTK-based system.\n* PhD F noticed that the SRI system performs worse when the microphone is far from the speaker.\n* PhD F proposed to improve the SRI system's performance in noisy conditions by adapting it using a small amount of data collected in the same room where the meeting was held.\n* PhD F also proposed to run a test to compare the system's performance on TI digits to its performance on Switchboard data.",
+        "queryType": "GENERAL",
+        "unanswerable": false,
+        "contextDependent": false,
+        "attributionRanges": [
+          {
+            "startIndex": 119,
+            "endIndex": 129
+          },
+          {
+            "startIndex": 192,
+            "endIndex": 194
+          },
+          {
+            "startIndex": 219,
+            "endIndex": 223
+          }
+        ],
+        "attributedSegmentCount": 19
+      },
+      {
+        "turnIndex": 7,
+        "query": "What did PhD A recommend to do when discussing forced alignment?",
+        "response": "* PhD A suggested using a \"proximity constraint\" to help the forced alignment algorithm determine which words most likely correspond to each speaker.\n* They also proposed to allow for \"reject models\" that could match fragments and noise.\n* Additionally, PhD A suggested marking the beginning and end of foreground speech by hand to improve the accuracy of the alignment.",
+        "queryType": "SPECIFIC",
+        "unanswerable": false,
+        "contextDependent": false,
+        "attributionRanges": [
+          {
+            "startIndex": 452,
+            "endIndex": 452
+          },
+          {
+            "startIndex": 458,
+            "endIndex": 458
+          },
+          {
+            "startIndex": 464,
+            "endIndex": 469
+          },
+          {
+            "startIndex": 471,
+            "endIndex": 471
+          },
+          {
+            "startIndex": 495,
+            "endIndex": 495
+          }
+        ],
+        "attributedSegmentCount": 10
+      },
+      {
+        "turnIndex": 8,
+        "query": "What was the primary objective of the meeting?",
+        "response": "* The primary objective of the meeting was to discuss the results of the digit recognition experiments conducted using the SRI and HTK-based systems.\n* The participants also discussed how to improve the performance of the SRI system in noisy conditions and explored methods for enhancing the accuracy of forced alignment.",
+        "queryType": "GENERAL",
+        "unanswerable": false,
+        "contextDependent": false,
+        "attributionRanges": [
+          {
+            "startIndex": 119,
+            "endIndex": 129
+          },
+          {
+            "startIndex": 140,
+            "endIndex": 145
+          },
+          {
+            "startIndex": 192,
+            "endIndex": 194
+          },
+          {
+            "startIndex": 219,
+            "endIndex": 223
+          },
+          {
+            "startIndex": 333,
+            "endIndex": 333
+          },
+          {
+            "startIndex": 435,
+            "endIndex": 445
+          }
+        ],
+        "attributedSegmentCount": 37
+      },
+      {
+        "turnIndex": 9,
+        "query": "Can you list the main tasks that were agreed upon during the meeting?",
+        "response": "* The participants decided to conduct a test to determine if the SRI system would show improvement if trained on TI digits, and to compare the results to the system trained on Switchboard data.\n* They also agreed to investigate methods for improving the SRI system's performance in noisy conditions and to explore techniques for enhancing the accuracy of forced alignment.",
+        "queryType": "GENERAL",
+        "unanswerable": false,
+        "contextDependent": false,
+        "attributionRanges": [
+          {
+            "startIndex": 108,
+            "endIndex": 108
+          },
+          {
+            "startIndex": 118,
+            "endIndex": 129
+          },
+          {
+            "startIndex": 189,
+            "endIndex": 189
+          },
+          {
+            "startIndex": 192,
+            "endIndex": 194
+          },
+          {
+            "startIndex": 219,
+            "endIndex": 224
+          },
+          {
+            "startIndex": 327,
+            "endIndex": 327
+          }
+        ],
+        "attributedSegmentCount": 24
+      }
+    ],
+    "stats": {
+      "unanswerableCount": 0,
+      "attributedTurnCount": 10,
+      "queryTypeCounts": {
+        "SPECIFIC": 5,
+        "YES_NO": 2,
+        "GENERAL": 3
+      }
+    },
+    "ingestedAt": "2026-07-25T14:25:44.407095+00:00"
+  },
+  {
+    "_id": "042bb7d7c715462d83e04f2fb76dbe93",
+    "meetingId": "covid10",
+    "split": "TRAIN",
+    "corpus": "PARLIAMENT",
+    "domain": "PARLIAMENTARY",
+    "turnCount": 10,
+    "turns": [
+      {
+        "turnIndex": 0,
+        "query": "Which questions were raised during the meeting that the members were not able to get answers to?",
+        "response": "The following questions were raised during the meeting but were not answered:\n- Will the government consider making changes to programs to ensure seasonal businesses can get help?\n- Will the government bring forward a plan to preserve Canadian jobs?\n- Will the government put forward a plan to ensure the use of Canadian oil before oil coming in from places like Saudi Arabia?\n- How many companies legally take advantage of tax avoidance in tax havens?\n- How much money escapes taxation through this legal mechanism?",
+        "queryType": "SPECIFIC",
+        "unanswerable": false,
+        "contextDependent": false,
+        "attributionRanges": [
+          {
+            "startIndex": 216,
+            "endIndex": 216
+          },
+          {
+            "startIndex": 232,
+            "endIndex": 232
+          },
+          {
+            "startIndex": 234,
+            "endIndex": 234
+          }
+        ],
+        "attributedSegmentCount": 3
+      },
+      {
+        "turnIndex": 1,
+        "query": "What was decided regarding the Canada Child Benefit?",
+        "response": "The Canada Child Benefit was not discussed during the meeting.",
+        "queryType": "SPECIFIC",
+        "unanswerable": true,
+        "contextDependent": false,
+        "attributionRanges": [],
+        "attributedSegmentCount": 0
+      },
+      {
+        "turnIndex": 2,
+        "query": "Did anyone from the agriculture sector disagree with the Minister of Agriculture regarding the $252 million in proposed aid for the sector?",
+        "response": "The meeting transcript does not contain any information on disagreements from the agriculture sector regarding the Minister of Agriculture's proposed $252 million in aid for the sector.",
+        "queryType": "YES_NO",
+        "unanswerable": true,
+        "contextDependent": false,
+        "attributionRanges": [],
+        "attributedSegmentCount": 0
+      },
+      {
+        "turnIndex": 3,
+        "query": "What was decided regarding the Canadian Armed Forces in the area where the helicopter crashed?",
+        "response": "The participants observed a moment of silence in memory of the six members of the Canadian Armed Forces who lost their lives last Wednesday in a helicopter crash off the coast of Greece. They expressed their condolences to the families and friends of the six military heroes who lost their lives at sea last week. All members of the House stand shoulder to shoulder with the families, with the crew of the HMCS Fredericton and, indeed, with the entire Canadian Armed Forces community during this time of grief. Their number one priority is to make sure that they look after them, and that's exactly what they were doing. Currently, the investigation was ongoing. Their investigative team was currently on the ground. The Italian minister of defence promised full support for this investigation and any support that was required.",
+        "queryType": "SPECIFIC",
+        "unanswerable": false,
+        "contextDependent": false,
+        "attributionRanges": [
+          {
+            "startIndex": 0,
+            "endIndex": 0
+          },
+          {
+            "startIndex": 99,
+            "endIndex": 100
+          }
+        ],
+        "attributedSegmentCount": 3
+      },
+      {
+        "turnIndex": 4,
+        "query": "Did the Minister of Natural Resources agree to consider looking at ways to expedite projects in the country?",
+        "response": "The Minister of Natural Resources did not agree to look at ways to expedite projects in the country. They discussed initiatives related to the orphan wells program, which is a partnership with the Alberta government.",
+        "queryType": "YES_NO",
+        "unanswerable": false,
+        "contextDependent": false,
+        "attributionRanges": [
+          {
+            "startIndex": 235,
+            "endIndex": 237
+          }
+        ],
+        "attributedSegmentCount": 3
+      },
+      {
+        "turnIndex": 5,
+        "query": "What did the Minister of Agriculture recommend should be done to address the economic losses faced by potato farmers?",
+        "response": "The Minister of Agriculture did not provide any recommendations to address the economic losses faced by potato farmers.",
+        "queryType": "SPECIFIC",
+        "unanswerable": false,
+        "contextDependent": false,
+        "attributionRanges": [
+          {
+            "startIndex": 148,
+            "endIndex": 152
+          }
+        ],
+        "attributedSegmentCount": 5
+      },
+      {
+        "turnIndex": 6,
+        "query": "Can you provide a quick recap of the main discussions and key takeaways from the meeting?",
+        "response": "äußerstThis is a debate on small and medium businesses and household debt arising from the COVID pandemic and the impact on individual Canadians and the economy as a whole.\",",
+        "queryType": "GENERAL",
+        "unanswerable": false,
+        "contextDependent": false,
+        "attributionRanges": [
+          {
+            "startIndex": 130,
+            "endIndex": 131
+          },
+          {
+            "startIndex": 193,
+            "endIndex": 200
+          },
+          {
+            "startIndex": 211,
+            "endIndex": 216
+          }
+        ],
+        "attributedSegmentCount": 16
+      },
+      {
+        "turnIndex": 7,
+        "query": "What was the overarching goal of this meeting?",
+        "response": "Here's a quick overview of the main discussions and takeaways from the meeting:\n\n* The Canadian government discussed providing economic relief to sectors affected by the COVID-19 pandemic, including fisheries, agriculture, and tourism.\n* The government announced $62.5 million in support for the fish and seafood processing sector, $252 million in aid for the agriculture sector, and funding for tourism businesses through regional development agencies.\n* Concerns were raised by members about the adequacy of the proposed aid packages and the eligibility criteria for various relief programs.\n* Discussions were held on issues such as the need to support seasonal businesses, preserve Canadian jobs, and prioritize the use of domestic oil over imported oil.\n* There was no resolution reached on questions related to tax avoidance in tax havens, the impact of the pandemic on the Canadian Armed Forces, or specific measures to address the economic losses faced by potato farmers.",
+        "queryType": "GENERAL",
+        "unanswerable": false,
+        "contextDependent": false,
+        "attributionRanges": [
+          {
+            "startIndex": 26,
+            "endIndex": 26
+          },
+          {
+            "startIndex": 68,
+            "endIndex": 72
+          },
+          {
+            "startIndex": 99,
+            "endIndex": 100
+          },
+          {
+            "startIndex": 122,
+            "endIndex": 122
+          },
+          {
+            "startIndex": 148,
+            "endIndex": 152
+          },
+          {
+            "startIndex": 155,
+            "endIndex": 155
+          },
+          {
+            "startIndex": 197,
+            "endIndex": 197
+          },
+          {
+            "startIndex": 216,
+            "endIndex": 216
+          },
+          {
+            "startIndex": 232,
+            "endIndex": 234
+          }
+        ],
+        "attributedSegmentCount": 20
+      },
+      {
+        "turnIndex": 8,
+        "query": "Besides the fisheries, agriculture, and tourism sectors, were there other industries or sectors that were discussed in the meeting as being significantly affected by the COVID-19 pandemic?",
+        "response": "There was no discussion about other industries or sectors significantly impacted by the COVID-19 pandemic, aside from the fisheries, agriculture, and tourism sectors.",
+        "queryType": "YES_NO",
+        "unanswerable": true,
+        "contextDependent": true,
+        "attributionRanges": [],
+        "attributedSegmentCount": 0
+      },
+      {
+        "turnIndex": 9,
+        "query": "What was decided regarding the proposed changes to Canada's Pension Plan?",
+        "response": "This meeting did not discuss any proposed changes to Canada's Pension Plan.",
+        "queryType": "SPECIFIC",
+        "unanswerable": true,
+        "contextDependent": false,
+        "attributionRanges": [],
+        "attributedSegmentCount": 0
+      }
+    ],
+    "stats": {
+      "unanswerableCount": 4,
+      "attributedTurnCount": 6,
+      "queryTypeCounts": {
+        "SPECIFIC": 5,
+        "YES_NO": 3,
+        "GENERAL": 2
+      }
+    },
+    "ingestedAt": "2026-07-25T14:25:44.407095+00:00"
+  }
+]

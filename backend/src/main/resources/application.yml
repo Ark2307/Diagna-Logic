@@ -1,0 +1,105 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: diagna-logic
+  # NOTE: as of Spring Boot 4.0, Mongo connection properties (uri/host/port/
+  # database/credentials) live under `spring.mongodb.*`, NOT the pre-4.0
+  # `spring.data.mongodb.*` (that prefix is now error-level-deprecated and
+  # silently inert — it no longer configures the MongoClient at all).
+  # `spring.data.mongodb.*` still exists but is now Spring-Data-behavior-only
+  # (auto-index-creation, field-naming-strategy, gridfs, etc).
+  mongodb:
+    # Overridden by the MONGODB_URI env var in every other environment.
+    # 27017 is docker-compose.yml's standard mapping; see
+    # docker-compose.override.yml (gitignored) for this machine's local remap.
+    uri: ${MONGODB_URI:mongodb://localhost:27017/diagna}
+  jackson:
+    default-property-inclusion: non_null
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when-authorized
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+
+# --- Diagna-Logic application configuration ---------------------------------
+diagna:
+  llm:
+    # Which registered LlmProvider/EmbeddingProvider bean id is used when a
+    # request doesn't specify one. "mock" requires no API key and is the
+    # default so the app runs out of the box; set to "openai" once
+    # OPENAI_API_KEY is configured.
+    default-provider: ${LLM_DEFAULT_PROVIDER:mock}
+    openai:
+      api-key: ${OPENAI_API_KEY:}
+      chat-model: ${LLM_OPENAI_MODEL:gpt-4.1-mini}
+      embedding-model: ${LLM_OPENAI_EMBEDDING_MODEL:text-embedding-3-small}
+      embedding-dimensions: ${LLM_OPENAI_EMBEDDING_DIMENSIONS:1536}
+      timeout-seconds: 60
+    # Response cache / observability trail (llm_invocations collection).
+    cache:
+      enabled: true
+      ttl-days: 30
+
+  rag:
+    # Chunking: consecutive transcript segments are packed into windows of
+    # roughly this many tokens (never splitting a segment), with one segment
+    # of overlap between consecutive chunks.
+    chunk-target-tokens: 400
+    chunk-overlap-segments: 1
+
+    # Retrieval: how many top fused (cosine + lexical) chunks to pack into
+    # the answer prompt.
+    top-k: 6
+
+    # Scope guard floor (layer 2): if the best raw cosine score across a
+    # meeting's chunks is below this, the request is answered `unanswerable`
+    # with reason OUT_OF_SCOPE WITHOUT calling the LLM at all.
+    #
+    # Calibrated empirically against MockEmbeddingProvider (4096-dim stop-word-
+    # filtered hashing trick) on real meeting Bmr019: clearly out-of-scope
+    # questions ("what's the weather in Paris?", "how do I bake a cake?",
+    # nonsense words) scored 0.0-0.064; the ground-truth in-scope question
+    # ("What did Professor B recommend during the digits discussion?") scored
+    # 0.35. 0.15 sits with margin above the out-of-scope cluster.
+    #
+    # Known mock limitation: a crude bag-of-words hash sometimes scores a
+    # genuinely in-scope but lexically-sparse question quite low too (a real
+    # embedding model captures semantic similarity the hash can't) — this
+    # floor is tuned to reliably reject clearly-unrelated questions, not to
+    # achieve perfect recall on hard cases with the mock. Revisit if
+    # MockEmbeddingProvider's dimensionality/tokenization changes, or when
+    # running against OpenAI's real embeddings (score distributions differ).
+    min-relevance: 0.15
+
+    # AUTO: send the full transcript alongside retrieved chunks when the
+    # meeting fits max-full-transcript-tokens (keeps GENERAL "what was this
+    # meeting about" questions from being starved by top-K). Falls back to
+    # RETRIEVAL_ONLY above that budget. FULL_WHEN_FITS/RETRIEVAL_ONLY force
+    # one behaviour regardless of size.
+    context-mode: AUTO
+    max-full-transcript-tokens: 12000
+
+    # Token budget for /ai/generate's map-reduce fallback on the small
+    # number of meetings whose transcript exceeds a single-pass prompt.
+    generation-chunk-budget-tokens: 6000
+
+  chat:
+    # Conversation history budget (tokens) kept when replaying prior turns
+    # for a follow-up question — see ConversationContextBuilder.
+    history-budget-tokens: 2000
+
+logging:
+  level:
+    com.diagna.logic: INFO

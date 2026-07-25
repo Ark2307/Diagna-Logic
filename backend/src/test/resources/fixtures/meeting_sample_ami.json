@@ -1,0 +1,507 @@
+{
+  "_id": "ES2005a",
+  "corpus": "AMI",
+  "domain": "PRODUCT",
+  "split": "TRAIN",
+  "segmentCount": 94,
+  "charCount": 3890,
+  "estimatedTokens": 972,
+  "speakerCount": 4,
+  "dialogCount": 2,
+  "speakers": [
+    {
+      "name": "Project Manager",
+      "segmentCount": 39,
+      "charCount": 1532
+    },
+    {
+      "name": "User Interface",
+      "segmentCount": 27,
+      "charCount": 888
+    },
+    {
+      "name": "Industrial Designer",
+      "segmentCount": 16,
+      "charCount": 557
+    },
+    {
+      "name": "Marketing",
+      "segmentCount": 12,
+      "charCount": 913
+    }
+  ],
+  "transcriptSegments": [
+    {
+      "index": 0,
+      "speakerName": "Project Manager",
+      "text": "Uh, making a profit of fifty million Euros.."
+    },
+    {
+      "index": 1,
+      "speakerName": "Industrial Designer",
+      "text": "Alright so twenty five."
+    },
+    {
+      "index": 2,
+      "speakerName": "User Interface",
+      "text": "Mm'kay."
+    },
+    {
+      "index": 3,
+      "speakerName": "Project Manager",
+      "text": "So, it's go gonna have to be be pretty damn trendy.."
+    },
+    {
+      "index": 4,
+      "speakerName": "Industrial Designer",
+      "text": "So yeah, I've The only the only remote controls I've used usually come with the television, and they're fairly basic."
+    },
+    {
+      "index": 5,
+      "speakerName": "Project Manager",
+      "text": "Yeah. Yeah."
+    },
+    {
+      "index": 6,
+      "speakerName": "User Interface",
+      "text": "Mm-hmm."
+    },
+    {
+      "index": 7,
+      "speakerName": "Industrial Designer",
+      "text": "So uh."
+    },
+    {
+      "index": 8,
+      "speakerName": "Project Manager",
+      "text": "Yeah, I was thinking that as well, I think the the only ones that I've seen that you buy are the sort of one for all type things where they're,"
+    },
+    {
+      "index": 9,
+      "speakerName": "User Interface",
+      "text": "Yeah the universal ones. Yeah."
+    },
+    {
+      "index": 10,
+      "speakerName": "Industrial Designer",
+      "text": "Mm."
+    },
+    {
+      "index": 11,
+      "speakerName": "Project Manager",
+      "text": "yeah. So presumably that might be an idea to put into."
+    },
+    {
+      "index": 12,
+      "speakerName": "Industrial Designer",
+      "text": "But but to sell it for twenty five you need a lot of neat features. For sure."
+    },
+    {
+      "index": 13,
+      "speakerName": "Marketing",
+      "text": "Slim."
+    },
+    {
+      "index": 14,
+      "speakerName": "Project Manager",
+      "text": "Yeah, yeah."
+    },
+    {
+      "index": 15,
+      "speakerName": "User Interface",
+      "text": "Yeah."
+    },
+    {
+      "index": 16,
+      "speakerName": "Project Manager",
+      "text": "Uh'cause I mean, what uh twenty five Euros, that's about I dunno, fifteen Pounds or so? And that's quite a lot for a remote control."
+    },
+    {
+      "index": 17,
+      "speakerName": "User Interface",
+      "text": "Mm-hmm, it's about that."
+    },
+    {
+      "index": 18,
+      "speakerName": "Industrial Designer",
+      "text": "Yeah, yeah."
+    },
+    {
+      "index": 19,
+      "speakerName": "User Interface",
+      "text": "Mm."
+    },
+    {
+      "index": 20,
+      "speakerName": "User Interface",
+      "text": "Um well my first thoughts would be most remote controls are grey or black. As you said they come with the T_V_ so it's normally just your basic grey black remote control functions,"
+    },
+    {
+      "index": 21,
+      "speakerName": "Project Manager",
+      "text": "Uh-huh."
+    },
+    {
+      "index": 22,
+      "speakerName": "User Interface",
+      "text": "so maybe we could think about colour?"
+    },
+    {
+      "index": 23,
+      "speakerName": "Project Manager",
+      "text": "Mm-hmm."
+    },
+    {
+      "index": 24,
+      "speakerName": "User Interface",
+      "text": "Make that might make it a bit different from the rest at least. Um, and as you say, we need to have some kind of gimmick, so um I thought maybe something like if you lose it and you can whistle,"
+    },
+    {
+      "index": 25,
+      "speakerName": "Project Manager",
+      "text": "Okay. The the keyrings, yeah yeah."
+    },
+    {
+      "index": 26,
+      "speakerName": "User Interface",
+      "text": "you know those things? Because we always lose our remote control."
+    },
+    {
+      "index": 27,
+      "speakerName": "Industrial Designer",
+      "text": "Right."
+    },
+    {
+      "index": 28,
+      "speakerName": "Marketing",
+      "text": "Uh yeah uh,"
+    },
+    {
+      "index": 29,
+      "speakerName": "Project Manager",
+      "text": "Okay, that's cool."
+    },
+    {
+      "index": 30,
+      "speakerName": "Marketing",
+      "text": "being as a Marketing Exper Expert I will like to say like before deciding the cost of this remote control or any other things we must see the market potential for this product like what is the competition in the market? What are the available prices of the other remote controls in the prices?"
+    },
+    {
+      "index": 31,
+      "speakerName": "Project Manager",
+      "text": "Okay."
+    },
+    {
+      "index": 32,
+      "speakerName": "Marketing",
+      "text": "What speciality other remote controls are having and how complicated it is to use these remote controls as compared to other remote controls available in the market. So before deciding or before finalising this project, we must discuss all these things, like."
+    },
+    {
+      "index": 33,
+      "speakerName": "User Interface",
+      "text": "Okay."
+    },
+    {
+      "index": 34,
+      "speakerName": "Marketing",
+      "text": "and apart from this, it should be having a good look also, because people really li uh like to play with it when they are watching movies or playing with or playing with their C_D_ player, M_P_ three player like any electronic devices."
+    },
+    {
+      "index": 35,
+      "speakerName": "User Interface",
+      "text": "Mm. Mm-hmm."
+    },
+    {
+      "index": 36,
+      "speakerName": "Marketing",
+      "text": "They really want to have something good, having a good design in their hands,"
+    },
+    {
+      "index": 37,
+      "speakerName": "User Interface",
+      "text": "Mm-hmm. Yeah."
+    },
+    {
+      "index": 38,
+      "speakerName": "Project Manager",
+      "text": "Okay."
+    },
+    {
+      "index": 39,
+      "speakerName": "Marketing",
+      "text": "so, yes,"
+    },
+    {
+      "index": 40,
+      "speakerName": "Project Manager",
+      "text": "'Kay."
+    },
+    {
+      "index": 41,
+      "speakerName": "Marketing",
+      "text": "all this."
+    },
+    {
+      "index": 42,
+      "speakerName": "Industrial Designer",
+      "text": "Uh, what do we think a."
+    },
+    {
+      "index": 43,
+      "speakerName": "Project Manager",
+      "text": "So, we're looking for'Kay."
+    },
+    {
+      "index": 44,
+      "speakerName": "Industrial Designer",
+      "text": "What do we think a good size would be for this?."
+    },
+    {
+      "index": 45,
+      "speakerName": "Project Manager",
+      "text": "We're."
+    },
+    {
+      "index": 46,
+      "speakerName": "Industrial Designer",
+      "text": "'Cause I I know as you add more buttons to the remote it sometimes gets so big and clunky"
+    },
+    {
+      "index": 47,
+      "speakerName": "Project Manager",
+      "text": "Sorry, carry on.."
+    },
+    {
+      "index": 48,
+      "speakerName": "Industrial Designer",
+      "text": "and there's just like a hundred buttons on it,"
+    },
+    {
+      "index": 49,
+      "speakerName": "Project Manager",
+      "text": "Mm-hmm."
+    },
+    {
+      "index": 50,
+      "speakerName": "User Interface",
+      "text": "Yeah."
+    },
+    {
+      "index": 51,
+      "speakerName": "Industrial Designer",
+      "text": "or you could have a really small slim one but then you could lose it easily.."
+    },
+    {
+      "index": 52,
+      "speakerName": "Project Manager",
+      "text": "Mm-hmm."
+    },
+    {
+      "index": 53,
+      "speakerName": "User Interface",
+      "text": "Yeah. Then you lose it, yeah.."
+    },
+    {
+      "index": 54,
+      "speakerName": "Project Manager",
+      "text": "Okay."
+    },
+    {
+      "index": 55,
+      "speakerName": "User Interface",
+      "text": "Kind of um, maybe more like a P_D_A_ kind of, just hand held, like,"
+    },
+    {
+      "index": 56,
+      "speakerName": "Project Manager",
+      "text": "For for uh"
+    },
+    {
+      "index": 57,
+      "speakerName": "User Interface",
+      "text": "'cause."
+    },
+    {
+      "index": 58,
+      "speakerName": "Project Manager",
+      "text": "remember we're trying to make it for twelve Euros fifty.."
+    },
+    {
+      "index": 59,
+      "speakerName": "User Interface",
+      "text": "Yeah. No, I wasn't, no sorry I wasn't thinking of the screen of like a P_D_A_"
+    },
+    {
+      "index": 60,
+      "speakerName": "Project Manager",
+      "text": "Okay well right we'll have to um I'll."
+    },
+    {
+      "index": 61,
+      "speakerName": "User Interface",
+      "text": "but"
+    },
+    {
+      "index": 62,
+      "speakerName": "Project Manager",
+      "text": "we're k having another meeting in half an hour so um"
+    },
+    {
+      "index": 63,
+      "speakerName": "User Interface",
+      "text": "Okay."
+    },
+    {
+      "index": 64,
+      "speakerName": "Project Manager",
+      "text": "we should all look into a bit uh, oh actually, no, we'll allocate. So you do the looking around at other remote controls."
+    },
+    {
+      "index": 65,
+      "speakerName": "Marketing",
+      "text": "Yeah."
+    },
+    {
+      "index": 66,
+      "speakerName": "Project Manager",
+      "text": "Um, if you could maybe come up with sort of shapes and suggested shades or whatever, and you could look into um basically how how it's made I_E_ like how you make it all in one, how what sort of materials are available to you whatever. And obviously, other instructions will come from the personal coach."
+    },
+    {
+      "index": 67,
+      "speakerName": "Industrial Designer",
+      "text": "Right."
+    },
+    {
+      "index": 68,
+      "speakerName": "Project Manager",
+      "text": "Which will probably just usurp what I said so."
+    },
+    {
+      "index": 69,
+      "speakerName": "User Interface",
+      "text": "So you want me to look at shapes and everything you said?"
+    },
+    {
+      "index": 70,
+      "speakerName": "Project Manager",
+      "text": "Shapes and colours and um basically how to make it attractive."
+    },
+    {
+      "index": 71,
+      "speakerName": "User Interface",
+      "text": "Yep. Okay."
+    },
+    {
+      "index": 72,
+      "speakerName": "Project Manager",
+      "text": "Uh."
+    },
+    {
+      "index": 73,
+      "speakerName": "User Interface",
+      "text": "Mm-hmm."
+    },
+    {
+      "index": 74,
+      "speakerName": "Project Manager",
+      "text": "And you look at competition and design."
+    },
+    {
+      "index": 75,
+      "speakerName": "Marketing",
+      "text": "Yep."
+    },
+    {
+      "index": 76,
+      "speakerName": "Project Manager",
+      "text": "Cool.."
+    },
+    {
+      "index": 77,
+      "speakerName": "Industrial Designer",
+      "text": "Okay."
+    },
+    {
+      "index": 78,
+      "speakerName": "User Interface",
+      "text": "Okay."
+    },
+    {
+      "index": 79,
+      "speakerName": "Project Manager",
+      "text": "So"
+    },
+    {
+      "index": 80,
+      "speakerName": "Project Manager",
+      "text": "we have uh."
+    },
+    {
+      "index": 81,
+      "speakerName": "Industrial Designer",
+      "text": "Wait for emails?"
+    },
+    {
+      "index": 82,
+      "speakerName": "Marketing",
+      "text": "Uh."
+    },
+    {
+      "index": 83,
+      "speakerName": "Project Manager",
+      "text": "Um."
+    },
+    {
+      "index": 84,
+      "speakerName": "Industrial Designer",
+      "text": "Hmm."
+    },
+    {
+      "index": 85,
+      "speakerName": "Project Manager",
+      "text": "Okay, groovy. And no doubt we'll get um."
+    },
+    {
+      "index": 86,
+      "speakerName": "User Interface",
+      "text": "Oh no,."
+    },
+    {
+      "index": 87,
+      "speakerName": "Project Manager",
+      "text": "Sorry."
+    },
+    {
+      "index": 88,
+      "speakerName": "User Interface",
+      "text": "Sorry"
+    },
+    {
+      "index": 89,
+      "speakerName": "Project Manager",
+      "text": "We'll get um warnings for next meetings as well."
+    },
+    {
+      "index": 90,
+      "speakerName": "User Interface",
+      "text": "it's okay. Okay, cool."
+    },
+    {
+      "index": 91,
+      "speakerName": "Project Manager",
+      "text": "Okay. I shall I can't imagine these are worth much.."
+    },
+    {
+      "index": 92,
+      "speakerName": "Marketing",
+      "text": "Hmm."
+    },
+    {
+      "index": 93,
+      "speakerName": "Project Manager",
+      "text": "Okay. Fashion into electronic. Okay."
+    }
+  ],
+  "sourceFile": "train.jsonl",
+  "ingestedAt": "2026-07-25T14:25:44.407095+00:00"
+}
