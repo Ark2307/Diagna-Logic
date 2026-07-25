@@ -18,7 +18,48 @@
 *.zip
 *.tar.gz
 *.rar
+# ...but keep the Maven wrapper jar, which the repo depends on to build
+!.mvn/wrapper/maven-wrapper.jar
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# --- Diagna-Logic project-specific ---
+
+# Raw MISeD dataset (downloaded by tools/download_mised.sh, not checked in)
+data/raw/
+
+# Python
+tools/ingest/.venv/
+tools/ingest/__pycache__/
+tools/ingest/tests/__pycache__/
+tools/ingest/.pytest_cache/
+**/__pycache__/
+*.pyc
+
+# Backend build output
+backend/target/
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/playwright-report/
+frontend/test-results/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Local-only compose overrides (e.g. port remaps for a machine's own conflicts)
+docker-compose.override.yml
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store

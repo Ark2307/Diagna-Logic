@@ -1,0 +1,40 @@
+# Local infrastructure for Diagna-Logic.
+#
+# MongoDB holds the ingested MISeD collections (meetings, dialogs, meeting_chunks,
+# chat_conversations, llm_invocations). Plain community MongoDB is sufficient — the
+# RAG layer does exact in-app cosine similarity over per-meeting chunk sets (at most
+# ~90 vectors), so no vector-search-capable image (e.g. mongodb-atlas-local) is needed.
+# See CLAUDE.md for the reasoning.
+services:
+  mongo:
+    image: mongo:7
+    container_name: diagna-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - diagna-mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # Optional lightweight admin UI for MongoDB. Not required for the app to run.
+  mongo-express:
+    image: mongo-express:1
+    container_name: diagna-mongo-express
+    restart: unless-stopped
+    depends_on:
+      mongo:
+        condition: service_healthy
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_BASICAUTH: "false"
+    profiles:
+      - tools
+
+volumes:
+  diagna-mongo-data:
