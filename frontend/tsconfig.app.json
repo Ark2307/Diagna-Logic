@@ -26,10 +26,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src"],
-  "exclude": [
-    "src/components/application/date-picker",
-    "src/components/base/file-upload-trigger",
-    "src/components/base/input/input-payment.tsx"
-  ]
+  "include": ["src"]
 }
