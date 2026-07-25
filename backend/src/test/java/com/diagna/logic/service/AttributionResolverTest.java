@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * dataset (meeting {@code Bmr019}, the turn "What did Professor B recommend
  * to do during the discussion of digits?"), which cites segments
  * 108, 118, 189, 224, 327 — the same cross-check used end-to-end by the
- * Playwright suite and the ETL fixtures.
+ * Playwright suite.
  */
 class AttributionResolverTest {
 

@@ -28,6 +28,16 @@ import java.util.stream.Collectors;
  * tend to blur). The candidate set is always small (median 23, max ~90
  * chunks per meeting), so the cosine scan is a brute-force, exact
  * comparison — no ANN index, no approximation.
+ *
+ * <p><strong>TODO (scale):</strong> if the corpus grows enough that top-K
+ * fused results stop being reliably precise (many meetings, denser chunk
+ * sets, or noisier lexical matches), add a re-ranking stage here: take the
+ * top ~20-30 fused candidates and re-score them with a cross-encoder (a
+ * model that scores the question and a passage together, rather than
+ * comparing independent vectors) before truncating to {@code topK}. Bigger
+ * lever, not needed at this corpus size: this fusion step is already exact
+ * over the full per-meeting candidate set, so a re-ranker would only
+ * reorder, not recover missed candidates.
  */
 @Component
 public class MeetingRetriever {
