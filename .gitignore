@@ -27,17 +27,6 @@ replay_pid*
 
 # --- Diagna-Logic project-specific ---
 
-# Raw MISeD dataset (downloaded by tools/download_mised.sh, not checked in)
-data/raw/
-
-# Python
-tools/ingest/.venv/
-tools/ingest/__pycache__/
-tools/ingest/tests/__pycache__/
-tools/ingest/.pytest_cache/
-**/__pycache__/
-*.pyc
-
 # Backend build output
 backend/target/
 
