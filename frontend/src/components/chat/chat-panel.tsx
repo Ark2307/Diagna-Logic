@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { AlertCircle, Send01 } from "@untitledui/icons";
-import { useMeetingDialogs, useSendChatMessage } from "@/api/queries";
+import { useConversations, useMeetingDialogs, useSendChatMessage } from "@/api/queries";
 import type { ChatMessage } from "@/api/types";
 import { Button } from "@/components/base/buttons/button";
 import { TextArea } from "@/components/base/textarea/textarea";
@@ -30,7 +30,19 @@ export const ChatPanel = ({ meetingId, onCitationClick }: ChatPanelProps) => {
     const [input, setInput] = useState("");
     const sendMessage = useSendChatMessage();
     const { data: dialogs } = useMeetingDialogs(meetingId);
+    const { data: conversations } = useConversations(meetingId);
     const listEndRef = useRef<HTMLDivElement>(null);
+
+    // Restore the meeting's most recent conversation on mount (conversations are ordered
+    // newest-first) — without this, reopening the chat always looks like a blank thread even
+    // though the history is already persisted server-side.
+    useEffect(() => {
+        if (conversationId || messages.length > 0) return;
+        if (!conversations || conversations.length === 0) return;
+        const latest = conversations[0];
+        setConversationId(latest.id);
+        setMessages(latest.messages);
+    }, [conversations, conversationId, messages.length]);
 
     useEffect(() => {
         listEndRef.current?.scrollIntoView({ behavior: "smooth" });

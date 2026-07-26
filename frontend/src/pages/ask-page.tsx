@@ -67,9 +67,11 @@ export const AskPage = () => {
                     </button>
 
                     <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                        <div className="flex h-[32rem] flex-col rounded-xl bg-primary p-5 shadow-xs ring-1 ring-secondary">
+                        <div className="flex h-128 flex-col rounded-xl bg-primary p-5 shadow-xs ring-1 ring-secondary">
                             <h2 className="mb-3 text-sm font-semibold text-primary">Chat — {selectedMeeting.id}</h2>
-                            <ChatPanel meetingId={selectedMeeting.id} />
+                            <div className="min-h-0 flex-1">
+                                <ChatPanel meetingId={selectedMeeting.id} />
+                            </div>
                         </div>
                         <div className="rounded-xl bg-primary p-5 shadow-xs ring-1 ring-secondary">
                             <h2 className="mb-3 text-sm font-semibold text-primary">Generate — {selectedMeeting.id}</h2>

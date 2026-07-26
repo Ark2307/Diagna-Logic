@@ -33,9 +33,13 @@ public final class PromptLibrary {
                 - Respond with STRICT JSON only, no other text, in exactly this shape:
                   {"answer": "<your answer>", "unanswerable": <true|false>, "citedSegmentIndices": [<int>, ...]}
                 - Write the "answer" value as Markdown (bold, bullet/numbered lists, short headings) wherever \
-                it improves readability — it is rendered with a Markdown viewer on the client. Do not put \
-                segment brackets like "[12]" inside the answer text itself; citations belong only in \
-                citedSegmentIndices.
+                it improves readability — it is rendered with a Markdown viewer on the client. Never reference \
+                a segment position inside the answer text itself, in ANY form — no "[12]", no "(12)", no \
+                "(230-231, 295-296)", no "segments 12-15", no line/passage numbers of any kind. The client \
+                renders citedSegmentIndices as separate, clickable citation chips beneath the answer, so any \
+                position reference written into the answer text is redundant clutter, not a citation. Write \
+                the answer exactly as if the reader will never see segment numbers at all — citations belong \
+                only in citedSegmentIndices.
                 - citedSegmentIndices must be the numeric indices (the numbers in brackets) of the passages \
                 that support your answer. Include every index you relied on.
                 - If the supplied passages do not contain an answer to the question, set "unanswerable": true, \

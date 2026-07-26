@@ -71,7 +71,7 @@ export const GeneratePanel = ({ meetingId }: GeneratePanelProps) => {
             {generate.isError && <p className="text-sm text-error-primary">Something went wrong generating that. Try again.</p>}
 
             {result && (
-                <div className="flex flex-col gap-4 rounded-xl bg-secondary p-4">
+                <div className="flex max-h-[60vh] flex-col gap-4 overflow-y-auto rounded-xl bg-secondary p-4">
                     <MarkdownContent content={result.text} />
 
                     {result.structured.keyPoints.length > 0 && (
