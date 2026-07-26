@@ -67,7 +67,7 @@ Or via the Makefile: `make backend`, `make frontend`.
 | `VITE_BACKEND_URL` | `http://localhost:8080` | Frontend dev-server proxy target, if the backend isn't on 8080 |
 
 RAG tuning (chunk size, top-K, relevance floor, context budget) lives in
-`backend/src/main/resources/application.yml` under `diagna.rag` — see the inline comments
+`backend/src/main/resources/application.yml` under `meetingiq.rag` — see the inline comments
 there for what each knob does and how the defaults were calibrated.
 
 ## API reference
@@ -161,5 +161,5 @@ cd frontend && npm run build   # tsc -b + vite build
 - **Chat always says out of scope**: the mock embedding provider is a crude hashing-trick
   bag-of-words, not real semantic embeddings — it occasionally under-scores a genuinely
   in-scope but lexically-sparse question. Set `OPENAI_API_KEY` and `LLM_DEFAULT_PROVIDER=openai`
-  for real embeddings, or lower `diagna.rag.min-relevance` in `application.yml`.
+  for real embeddings, or lower `meetingiq.rag.min-relevance` in `application.yml`.
 - **Frontend can't reach the API**: set `VITE_BACKEND_URL` if the backend isn't on port 8080.

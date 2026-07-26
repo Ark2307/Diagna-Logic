@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: diagna-logic
+    name: meetingiq-platform
   # NOTE: as of Spring Boot 4.0, Mongo connection properties (uri/host/port/
   # database/credentials) live under `spring.mongodb.*`, NOT the pre-4.0
   # `spring.data.mongodb.*` (that prefix is now error-level-deprecated and
@@ -33,8 +33,8 @@ springdoc:
   api-docs:
     path: /v3/api-docs
 
-# --- Diagna-Logic application configuration ---------------------------------
-diagna:
+# --- MeetingIQ application configuration ------------------------------------
+meetingiq:
   llm:
     # Which registered LlmProvider/EmbeddingProvider bean id is used when a
     # request doesn't specify one. "mock" requires no API key and is the
@@ -102,4 +102,4 @@ diagna:
 
 logging:
   level:
-    com.diagna.logic: INFO
+    com.meetingiq.platform: INFO
