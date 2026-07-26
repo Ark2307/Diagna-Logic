@@ -3,6 +3,7 @@ package com.meetingiq.platform.llm.task;
 import com.meetingiq.platform.domain.enums.GenerationTask;
 import com.meetingiq.platform.llm.core.JsonResponseParser;
 import com.meetingiq.platform.llm.core.LlmJsonMapper;
+import com.meetingiq.platform.llm.spi.JsonResponseSchema;
 import com.meetingiq.platform.llm.spi.LlmOptions;
 import com.meetingiq.platform.llm.spi.LlmQuery;
 import com.meetingiq.platform.llm.spi.ResponseParser;
@@ -52,6 +53,11 @@ public class GenerationQuery extends LlmQuery<GenerationResult> {
     @Override
     public ResponseParser<GenerationResult> parser() {
         return new JsonResponseParser<>(LlmJsonMapper.create(), GenerationResult.class);
+    }
+
+    @Override
+    public JsonResponseSchema responseSchema() {
+        return JsonSchemas.GENERATION_RESULT;
     }
 
     @Override

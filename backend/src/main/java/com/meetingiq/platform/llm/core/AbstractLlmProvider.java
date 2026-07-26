@@ -11,6 +11,8 @@ import com.meetingiq.platform.llm.spi.LlmQuery;
 import com.meetingiq.platform.llm.spi.LlmResult;
 import com.meetingiq.platform.llm.spi.ProviderCallException;
 import com.meetingiq.platform.llm.spi.ProviderUnavailableException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 
@@ -26,6 +28,8 @@ import java.time.Duration;
  * add a vendor.
  */
 public abstract class AbstractLlmProvider implements LlmProvider {
+
+    private static final Logger log = LoggerFactory.getLogger(AbstractLlmProvider.class);
 
     private final LlmResponseCache cache;
 
@@ -53,6 +57,12 @@ public abstract class AbstractLlmProvider implements LlmProvider {
         long startNanos = System.nanoTime();
         LlmCompletion completion = callProvider(query, model);
         Duration latency = Duration.ofNanos(System.nanoTime() - startNanos);
+
+        if (completion.finishReason() == FinishReason.LENGTH) {
+            log.warn("llm.response.truncated provider={} model={} task={} maxOutputTokens={} rawTextChars={} — "
+                            + "the model hit its output token limit before finishing; increase LlmOptions.maxOutputTokens for this task",
+                    descriptor().id(), model, query.taskName(), query.options().maxOutputTokens(), completion.text().length());
+        }
 
         if (cache.isEnabled()) {
             cache.save(cacheKey, descriptor().id(), query.taskName(), query.targetId(), completion, latency);

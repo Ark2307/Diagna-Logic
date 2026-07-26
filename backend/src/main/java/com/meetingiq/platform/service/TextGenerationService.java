@@ -13,6 +13,7 @@ import com.meetingiq.platform.llm.spi.LlmProvider;
 import com.meetingiq.platform.llm.spi.LlmResult;
 import com.meetingiq.platform.llm.task.GenerationQuery;
 import com.meetingiq.platform.llm.task.GenerationResult;
+import com.meetingiq.platform.llm.task.GenerationStructured;
 import com.meetingiq.platform.llm.task.MapSummaryQuery;
 import com.meetingiq.platform.llm.task.PromptLibrary;
 import com.meetingiq.platform.rag.ChunkCandidate;
@@ -36,6 +37,13 @@ import java.util.List;
  */
 @Service
 public class TextGenerationService {
+
+    /**
+     * Well above jsonDefaults()'s 1024 — a full meeting summary's structured fields (keyPoints,
+     * decisions, actionItems, ...) can be long. Observed a content-rich meeting truncate a
+     * generate:summary response at 4096; 8192 leaves real headroom above that.
+     */
+    private static final int GENERATION_MAX_OUTPUT_TOKENS = 8192;
 
     private final MeetingRepository meetingRepository;
     private final DialogRepository dialogRepository;
@@ -67,8 +75,8 @@ public class TextGenerationService {
 
         LlmProvider provider = providerRegistry.resolveLlm(request.provider());
         LlmOptions jsonOptions = request.model() != null && !request.model().isBlank()
-                ? LlmOptions.jsonDefaults().withModel(request.model())
-                : LlmOptions.jsonDefaults();
+                ? LlmOptions.jsonDefaults(GENERATION_MAX_OUTPUT_TOKENS).withModel(request.model())
+                : LlmOptions.jsonDefaults(GENERATION_MAX_OUTPUT_TOKENS);
         String instructions = effectiveInstructions(request);
 
         GenerationPlan plan = chunkPlanner.plan(meeting.estimatedTokens(), meeting.transcriptSegments(), ragProperties.generationChunkBudgetTokens());
@@ -78,7 +86,7 @@ public class TextGenerationService {
                 : runMapReduce(provider, request.task(), instructions, meetingId, plan.mapChunks(), jsonOptions);
 
         return new GenerateResponseDto(
-                result.payload().text(), result.payload().structured(),
+                result.payload().text(), GenerationStructured.normalize(result.payload().structured()),
                 result.providerId(), result.model(), result.usage(), result.latency().toMillis(), result.cached()
         );
     }

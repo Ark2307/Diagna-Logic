@@ -29,6 +29,8 @@ import com.meetingiq.platform.rag.ScopeGuard;
 import com.meetingiq.platform.rag.ScoredChunk;
 import com.meetingiq.platform.repository.ChatConversationRepository;
 import com.meetingiq.platform.repository.MeetingRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -49,6 +51,11 @@ import java.util.stream.IntStream;
  */
 @Service
 public class MeetingChatService {
+
+    private static final Logger log = LoggerFactory.getLogger(MeetingChatService.class);
+
+    /** Well above jsonDefaults()'s 1024 — a grounded answer's citedSegmentIndices array can be long against a full transcript. */
+    private static final int CHAT_MAX_OUTPUT_TOKENS = 4096;
 
     private final MeetingRepository meetingRepository;
     private final ChatConversationRepository chatConversationRepository;
@@ -94,6 +101,9 @@ public class MeetingChatService {
         RetrievalResult retrieval = retriever.retrieve(meetingId, retrievalQuery, ragProperties.topK(), request.provider());
 
         Optional<GuardedAnswer> outOfScope = scopeGuard.checkRelevanceFloor(retrieval.topCosineScore());
+        log.info("chat.scopeGuard meetingId={} topCosine={} floor={} verdict={}",
+                meetingId, String.format("%.3f", retrieval.topCosineScore()), ragProperties.minRelevance(),
+                outOfScope.isPresent() ? "OUT_OF_SCOPE" : "IN_SCOPE");
 
         GuardedAnswer guarded;
         String usedProvider = null;
@@ -126,12 +136,23 @@ public class MeetingChatService {
             String historyText = conversationContextBuilder.buildHistoryText(conversation.messages(), chatProperties.historyBudgetTokens());
 
             LlmProvider provider = providerRegistry.resolveLlm(request.provider());
+            // jsonDefaults()'s 1024-token default is sized for a short answer with no citations; a
+            // grounded answer citing many segments (esp. against the full transcript) needs more
+            // headroom or the citedSegmentIndices array gets cut off mid-response and fails to parse.
             LlmOptions options = request.model() != null && !request.model().isBlank()
-                    ? LlmOptions.jsonDefaults().withModel(request.model())
-                    : LlmOptions.jsonDefaults();
+                    ? LlmOptions.jsonDefaults(CHAT_MAX_OUTPUT_TOKENS).withModel(request.model())
+                    : LlmOptions.jsonDefaults(CHAT_MAX_OUTPUT_TOKENS);
 
             GroundedAnswerQuery query = new GroundedAnswerQuery(meetingId, historyText, context.text(), request.message(), options);
+            log.info("chat.llm.request meetingId={} provider={} model={} contextChars={} usedFullTranscript={} question=\"{}\"",
+                    meetingId, provider.descriptor().id(), options.model(), context.text().length(), usedFullTranscript, request.message());
+
             LlmResult<GroundedAnswer> result = provider.execute(query);
+            log.info("chat.llm.response meetingId={} provider={} model={} latencyMs={} promptTokens={} completionTokens={} unanswerable={} citedSegments={}",
+                    meetingId, result.providerId(), result.model(), result.latency().toMillis(),
+                    result.usage().promptTokens(), result.usage().completionTokens(),
+                    result.payload().unanswerable(),
+                    result.payload().citedSegmentIndices() == null ? 0 : result.payload().citedSegmentIndices().size());
 
             guarded = scopeGuard.verify(result.payload(), allowedIndices, meeting.transcriptSegments(), meeting.segmentCount());
             usedProvider = result.providerId();

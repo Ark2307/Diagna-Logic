@@ -5,6 +5,8 @@ import com.meetingiq.platform.llm.core.LlmProviderRegistry;
 import com.meetingiq.platform.llm.spi.EmbeddingProvider;
 import com.meetingiq.platform.llm.spi.EmbeddingQuery;
 import com.meetingiq.platform.repository.MeetingChunkRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.TextCriteria;
@@ -42,6 +44,8 @@ import java.util.stream.Collectors;
 @Component
 public class MeetingRetriever {
 
+    private static final Logger log = LoggerFactory.getLogger(MeetingRetriever.class);
+
     /** Cap on lexical candidates pulled per query — generous relative to a meeting's ~90-chunk ceiling. */
     private static final int LEXICAL_CANDIDATE_LIMIT = 50;
 
@@ -63,9 +67,13 @@ public class MeetingRetriever {
     }
 
     public RetrievalResult retrieve(String meetingId, String question, int topK, String embeddingProviderId) {
+        log.info("rag.retrieve.start meetingId={} embeddingProvider={} query=\"{}\"",
+                meetingId, embeddingProviderId == null ? "(default)" : embeddingProviderId, question);
+
         embeddingIndexService.ensureIndexed(meetingId, embeddingProviderId);
         List<MeetingChunk> chunks = chunkRepository.findByMeetingId(meetingId);
         if (chunks.isEmpty()) {
+            log.info("rag.retrieve.result meetingId={} chunks=0 topCosine=0.0", meetingId);
             return RetrievalResult.empty();
         }
 
@@ -88,6 +96,15 @@ public class MeetingRetriever {
                 .limit(topK)
                 .map(c -> new ScoredChunk(c, cosineById.getOrDefault(c.id(), 0.0)))
                 .toList();
+
+        if (log.isInfoEnabled()) {
+            String topPreview = topChunks.stream()
+                    .limit(5)
+                    .map(sc -> sc.chunk().id() + "(cos=" + String.format("%.3f", sc.cosineScore()) + ")")
+                    .collect(Collectors.joining(", "));
+            log.info("rag.retrieve.result meetingId={} candidates={} topCosine={} fusedTop5=[{}]",
+                    meetingId, chunks.size(), String.format("%.3f", topCosineScore), topPreview);
+        }
 
         return new RetrievalResult(topChunks, topCosineScore);
     }

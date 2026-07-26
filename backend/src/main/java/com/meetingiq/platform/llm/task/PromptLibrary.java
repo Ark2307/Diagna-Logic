@@ -70,7 +70,9 @@ public final class PromptLibrary {
                 headings) wherever it improves readability — these values are rendered with a Markdown viewer \
                 on the client, not displayed as plain text.
                 Leave a structured field as an empty list or empty string if the task or the transcript has \
-                nothing to report for it — never fabricate content to fill it.""".formatted(taskInstruction(task));
+                nothing to report for it — never fabricate content to fill it. Always include the top-level \
+                "structured" object and all six of its fields — never omit "structured" itself or any of its \
+                keys, even when several are empty.""".formatted(taskInstruction(task));
     }
 
     /** Plain-prose (not JSON) system prompt for one map-step partial summary — see {@code ChunkPlanner}. */

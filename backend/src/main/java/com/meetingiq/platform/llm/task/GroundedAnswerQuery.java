@@ -2,6 +2,7 @@ package com.meetingiq.platform.llm.task;
 
 import com.meetingiq.platform.llm.core.JsonResponseParser;
 import com.meetingiq.platform.llm.core.LlmJsonMapper;
+import com.meetingiq.platform.llm.spi.JsonResponseSchema;
 import com.meetingiq.platform.llm.spi.LlmOptions;
 import com.meetingiq.platform.llm.spi.LlmQuery;
 import com.meetingiq.platform.llm.spi.ResponseParser;
@@ -52,6 +53,11 @@ public class GroundedAnswerQuery extends LlmQuery<GroundedAnswer> {
     @Override
     public ResponseParser<GroundedAnswer> parser() {
         return new JsonResponseParser<>(LlmJsonMapper.create(), GroundedAnswer.class);
+    }
+
+    @Override
+    public JsonResponseSchema responseSchema() {
+        return JsonSchemas.GROUNDED_ANSWER;
     }
 
     @Override

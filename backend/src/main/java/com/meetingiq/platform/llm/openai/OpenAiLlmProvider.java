@@ -5,16 +5,22 @@ import com.meetingiq.platform.domain.TokenUsage;
 import com.meetingiq.platform.llm.core.AbstractLlmProvider;
 import com.meetingiq.platform.llm.core.LlmResponseCache;
 import com.meetingiq.platform.llm.spi.FinishReason;
+import com.meetingiq.platform.llm.spi.JsonResponseSchema;
 import com.meetingiq.platform.llm.spi.LlmCompletion;
 import com.meetingiq.platform.llm.spi.LlmOptions;
 import com.meetingiq.platform.llm.spi.LlmQuery;
 import com.meetingiq.platform.llm.spi.ProviderDescriptor;
 import com.openai.client.OpenAIClient;
+import com.openai.core.JsonValue;
 import com.openai.models.ResponseFormatJsonObject;
+import com.openai.models.ResponseFormatJsonSchema;
 import com.openai.models.chat.completions.ChatCompletion;
 import com.openai.models.chat.completions.ChatCompletionCreateParams;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.stereotype.Component;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * The OpenAI implementation of {@link com.meetingiq.platform.llm.spi.LlmProvider}.
@@ -68,7 +74,12 @@ public class OpenAiLlmProvider extends AbstractLlmProvider {
                 .maxCompletionTokens((long) query.options().maxOutputTokens());
 
         if (query.options().jsonMode()) {
-            builder.responseFormat(ResponseFormatJsonObject.builder().build());
+            JsonResponseSchema schema = query.responseSchema();
+            if (schema != null) {
+                builder.responseFormat(structuredOutputFormat(schema));
+            } else {
+                builder.responseFormat(ResponseFormatJsonObject.builder().build());
+            }
         }
 
         ChatCompletion completion = client.chat().completions().create(builder.build());
@@ -80,6 +91,29 @@ public class OpenAiLlmProvider extends AbstractLlmProvider {
                 .orElse(TokenUsage.ZERO);
 
         return new LlmCompletion(text, completion.model(), usage, mapFinishReason(choice.finishReason()));
+    }
+
+    /**
+     * Maps a vendor-neutral {@link JsonResponseSchema} onto OpenAI's Structured Outputs
+     * ({@code strict: true}) — the model's response is then guaranteed by the API itself to
+     * match the schema exactly (every property present, no extras), rather than merely being
+     * syntactically valid JSON as {@link ResponseFormatJsonObject} only guarantees.
+     */
+    private static ResponseFormatJsonSchema structuredOutputFormat(JsonResponseSchema schema) {
+        Map<String, JsonValue> schemaProperties = new LinkedHashMap<>();
+        schema.schema().forEach((key, value) -> schemaProperties.put(key, JsonValue.from(value)));
+
+        ResponseFormatJsonSchema.JsonSchema.Schema jsonSchema = ResponseFormatJsonSchema.JsonSchema.Schema.builder()
+                .additionalProperties(schemaProperties)
+                .build();
+
+        ResponseFormatJsonSchema.JsonSchema namedSchema = ResponseFormatJsonSchema.JsonSchema.builder()
+                .name(schema.name())
+                .schema(jsonSchema)
+                .strict(true)
+                .build();
+
+        return ResponseFormatJsonSchema.builder().jsonSchema(namedSchema).build();
     }
 
     private static FinishReason mapFinishReason(ChatCompletion.Choice.FinishReason reason) {
