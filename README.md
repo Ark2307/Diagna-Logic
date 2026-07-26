@@ -1,6 +1,6 @@
-# Diagna-Logic
+# MeetingIQ
 
-A meeting-intelligence app over Google Research's **MISeD** dataset (information-seeking
+A meeting-intelligence platform over Google Research's **MISeD** dataset (information-seeking
 dialogs grounded in real meeting transcripts). It has three parts:
 
 - **MongoDB** — 225 meetings and 432 dialogs, each with its transcript, speaker stats, and
