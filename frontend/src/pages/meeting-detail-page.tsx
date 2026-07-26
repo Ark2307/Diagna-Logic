@@ -101,7 +101,7 @@ export const MeetingDetailPage = () => {
                                             <button
                                                 type="button"
                                                 onClick={() => navigate(`/dialogs/${dialog.id}`)}
-                                                className="flex w-full items-center justify-between rounded-lg px-2 py-1.5 text-left text-sm transition-colors hover:bg-secondary"
+                                                className="flex w-full cursor-pointer items-center justify-between rounded-lg px-2 py-1.5 text-left text-sm transition-colors hover:bg-secondary"
                                             >
                                                 <span className="text-secondary">{dialog.turnCount} turns</span>
                                                 {topType && (

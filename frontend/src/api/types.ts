@@ -271,6 +271,8 @@ export interface MeetingSearchParams {
     speaker?: string;
     q?: string;
     minSegments?: number;
+    /** Case-insensitive substring match against the meeting id. */
+    meetingId?: string;
     page?: number;
     size?: number;
     sort?: string;

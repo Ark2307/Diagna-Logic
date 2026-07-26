@@ -17,9 +17,11 @@ public record MeetingSearchCriteria(
         String speaker,
         /** Free-text search over transcript content, via the {@code transcriptSegments.text} text index. */
         String q,
-        Integer minSegments
+        Integer minSegments,
+        /** Case-insensitive substring match against the meeting id (the document's {@code _id}). */
+        String meetingId
 ) {
     public static MeetingSearchCriteria empty() {
-        return new MeetingSearchCriteria(null, null, null, null, null, null);
+        return new MeetingSearchCriteria(null, null, null, null, null, null, null);
     }
 }

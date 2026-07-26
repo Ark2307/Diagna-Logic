@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 
@@ -125,6 +126,9 @@ public class MeetingRepository {
         }
         if (criteria.minSegments() != null) {
             query.addCriteria(where("segmentCount").gte(criteria.minSegments()));
+        }
+        if (criteria.meetingId() != null && !criteria.meetingId().isBlank()) {
+            query.addCriteria(where("_id").regex(Pattern.quote(criteria.meetingId()), "i"));
         }
     }
 

@@ -42,7 +42,7 @@ export const AskPage = () => {
                                     key={meeting.id}
                                     type="button"
                                     onClick={() => setSelectedMeeting(meeting)}
-                                    className="flex items-center justify-between rounded-xl bg-primary p-4 text-left shadow-xs ring-1 ring-secondary transition-colors hover:bg-secondary"
+                                    className="flex cursor-pointer items-center justify-between rounded-xl bg-primary p-4 text-left shadow-xs ring-1 ring-secondary transition-colors hover:bg-secondary"
                                 >
                                     <span className="flex items-center gap-2">
                                         <span className="text-sm font-medium text-primary">{meeting.id}</span>
@@ -58,7 +58,11 @@ export const AskPage = () => {
                 </div>
             ) : (
                 <div className="flex flex-col gap-4">
-                    <button type="button" onClick={() => setSelectedMeeting(null)} className="w-fit text-sm text-brand-secondary hover:text-brand-secondary_hover">
+                    <button
+                        type="button"
+                        onClick={() => setSelectedMeeting(null)}
+                        className="w-fit cursor-pointer text-sm text-brand-secondary hover:text-brand-secondary_hover"
+                    >
                         &larr; Choose a different meeting
                     </button>
 

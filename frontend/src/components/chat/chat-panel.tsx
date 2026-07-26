@@ -104,7 +104,7 @@ export const ChatPanel = ({ meetingId, onCitationClick }: ChatPanelProps) => {
                                             key={query}
                                             type="button"
                                             onClick={() => handleSend(query)}
-                                            className="rounded-lg border border-secondary bg-secondary px-3 py-2 text-left text-sm text-secondary transition-colors hover:bg-secondary_hover"
+                                            className="cursor-pointer rounded-lg border border-secondary bg-secondary px-3 py-2 text-left text-sm text-secondary transition-colors hover:bg-secondary_hover"
                                         >
                                             {query}
                                         </button>
@@ -145,7 +145,7 @@ export const ChatPanel = ({ meetingId, onCitationClick }: ChatPanelProps) => {
                                                     key={citation.segmentIndex}
                                                     type="button"
                                                     onClick={() => onCitationClick?.(citation.segmentIndex)}
-                                                    className="rounded-md bg-brand-secondary px-2 py-1 text-xs font-medium text-brand-secondary transition-colors hover:bg-brand-secondary_hover"
+                                                    className="cursor-pointer rounded-md bg-brand-secondary px-2 py-1 text-xs font-medium text-brand-secondary transition-colors hover:bg-brand-secondary_hover"
                                                     title={citation.text}
                                                 >
                                                     [{citation.segmentIndex}] {citation.speakerName}

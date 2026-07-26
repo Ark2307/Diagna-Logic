@@ -28,7 +28,7 @@ export const DialogDetailPage = () => {
                     <button
                         type="button"
                         onClick={() => navigate(`/meetings/${dialog.meetingId}`)}
-                        className="text-display-xs font-semibold text-primary hover:text-brand-secondary"
+                        className="cursor-pointer text-display-xs font-semibold text-primary hover:text-brand-secondary"
                     >
                         {dialog.meetingId}
                     </button>
@@ -74,7 +74,7 @@ export const DialogDetailPage = () => {
                                             key={citation.segmentIndex}
                                             type="button"
                                             onClick={() => navigate(`/meetings/${dialog.meetingId}?highlight=${citation.segmentIndex}`)}
-                                            className="rounded-md bg-brand-secondary px-2 py-1 text-xs font-medium text-brand-secondary transition-colors hover:bg-brand-secondary_hover"
+                                            className="cursor-pointer rounded-md bg-brand-secondary px-2 py-1 text-xs font-medium text-brand-secondary transition-colors hover:bg-brand-secondary_hover"
                                             title={citation.text}
                                         >
                                             [{citation.segmentIndex}] {citation.speakerName}

@@ -19,9 +19,11 @@ const CORPUS_COLORS: Record<string, string> = {
 
 interface CorpusMixChartProps {
     meetingsByCorpus: StatsSummary["meetingsByCorpus"];
+    /** When supplied, bars become clickable and the cursor reflects it — used to jump to that corpus's filtered meeting list. */
+    onCorpusClick?: (corpus: string) => void;
 }
 
-export const CorpusMixChart = ({ meetingsByCorpus }: CorpusMixChartProps) => {
+export const CorpusMixChart = ({ meetingsByCorpus, onCorpusClick }: CorpusMixChartProps) => {
     const data = CORPUS_ORDER.filter((corpus) => meetingsByCorpus[corpus] !== undefined).map((corpus) => ({
         corpus,
         label: CORPUS_LABELS[corpus],
@@ -45,9 +47,14 @@ export const CorpusMixChart = ({ meetingsByCorpus }: CorpusMixChartProps) => {
                         cursor={{ fill: "var(--chart-grid)" }}
                         content={<ChartTooltipContent formatter={(value) => `${formatNumber(Number(value))} meetings`} />}
                     />
-                    <Bar dataKey="count" radius={[0, 4, 4, 0]} maxBarSize={28}>
+                    <Bar
+                        dataKey="count"
+                        radius={[0, 4, 4, 0]}
+                        maxBarSize={28}
+                        onClick={onCorpusClick ? (entry) => onCorpusClick((entry.payload as { corpus: string }).corpus) : undefined}
+                    >
                         {data.map((entry) => (
-                            <Cell key={entry.corpus} fill={CORPUS_COLORS[entry.corpus]} />
+                            <Cell key={entry.corpus} fill={CORPUS_COLORS[entry.corpus]} style={{ cursor: onCorpusClick ? "pointer" : undefined }} />
                         ))}
                     </Bar>
                 </BarChart>

@@ -12,6 +12,16 @@ export function truncate(text: string, maxLength: number): string {
     return text.length <= maxLength ? text : `${text.slice(0, maxLength).trimEnd()}...`;
 }
 
+/** Formats a zero-indexed page/size/total into a "1-20 of 104" style range for list footers. */
+export function formatPageRange(page: number, size: number, totalElements: number): string {
+    if (totalElements === 0) {
+        return "0 of 0";
+    }
+    const start = page * size + 1;
+    const end = Math.min((page + 1) * size, totalElements);
+    return `${formatNumber(start)}-${formatNumber(end)} of ${formatNumber(totalElements)}`;
+}
+
 /** Badge color for a corpus — kept distinct per corpus so the dashboard's corpus-mix legend and list-page badges always agree. */
 export function corpusBadgeColor(corpus: Corpus): "blue" | "purple" | "orange" {
     switch (corpus) {

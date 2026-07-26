@@ -1,9 +1,15 @@
-import { apiGet } from "./client";
+import { apiGet, apiPost } from "./client";
 import { buildQueryString } from "./query-string";
+import { parseSort } from "./search-request";
 import type { AttributionResolution, Dialog, DialogSearchParams, PageResponse } from "./types";
 
 export function searchDialogs(params: DialogSearchParams): Promise<PageResponse<Dialog>> {
-    return apiGet(`/dialogs${buildQueryString(params)}`);
+    const { meetingId, split, corpus, queryType, hasUnanswerable, minTurns, page, size, sort } = params;
+    return apiPost("/dialogs/search", {
+        filters: { meetingId, split, corpus, queryType, hasUnanswerable, minTurns },
+        pagination: { page, size },
+        sort: parseSort(sort),
+    });
 }
 
 export function getDialog(id: string, resolveAttributions = false): Promise<Dialog> {

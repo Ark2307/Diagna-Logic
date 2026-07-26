@@ -3,7 +3,7 @@ import { ChartTooltipContent } from "@/components/application/charts/charts-base
 import type { StatsSummary } from "@/api/types";
 import { formatNumber, queryTypeLabel } from "@/lib/format";
 
-const QUERY_TYPE_ORDER = ["SPECIFIC", "YES_NO", "GENERAL"] as const;
+export const QUERY_TYPE_ORDER = ["SPECIFIC", "YES_NO", "GENERAL"] as const;
 const QUERY_TYPE_COLORS: Record<string, string> = {
     SPECIFIC: "var(--chart-series-1)",
     YES_NO: "var(--chart-series-2)",
@@ -12,9 +12,11 @@ const QUERY_TYPE_COLORS: Record<string, string> = {
 
 interface QueryTypeChartProps {
     queryTypeCounts: StatsSummary["queryTypeCounts"];
+    /** When supplied, bars become clickable and the cursor reflects it — used to jump to that query type's filtered dialog list. */
+    onQueryTypeClick?: (queryType: string) => void;
 }
 
-export const QueryTypeChart = ({ queryTypeCounts }: QueryTypeChartProps) => {
+export const QueryTypeChart = ({ queryTypeCounts, onQueryTypeClick }: QueryTypeChartProps) => {
     const data = QUERY_TYPE_ORDER.filter((type) => queryTypeCounts[type] !== undefined).map((type) => ({
         type,
         label: queryTypeLabel(type),
@@ -38,9 +40,14 @@ export const QueryTypeChart = ({ queryTypeCounts }: QueryTypeChartProps) => {
                         cursor={{ fill: "var(--chart-grid)" }}
                         content={<ChartTooltipContent formatter={(value) => `${formatNumber(Number(value))} turns`} />}
                     />
-                    <Bar dataKey="count" radius={[0, 4, 4, 0]} maxBarSize={28}>
+                    <Bar
+                        dataKey="count"
+                        radius={[0, 4, 4, 0]}
+                        maxBarSize={28}
+                        onClick={onQueryTypeClick ? (entry) => onQueryTypeClick((entry.payload as { type: string }).type) : undefined}
+                    >
                         {data.map((entry) => (
-                            <Cell key={entry.type} fill={QUERY_TYPE_COLORS[entry.type]} />
+                            <Cell key={entry.type} fill={QUERY_TYPE_COLORS[entry.type]} style={{ cursor: onQueryTypeClick ? "pointer" : undefined }} />
                         ))}
                     </Bar>
                 </BarChart>

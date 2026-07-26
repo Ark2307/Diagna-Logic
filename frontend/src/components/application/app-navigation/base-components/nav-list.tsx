@@ -13,9 +13,11 @@ interface NavListProps {
 }
 
 export const NavList = ({ activeUrl, items, className }: NavListProps) => {
-    const [open, setOpen] = useState(false);
+    // Recomputed every render from activeUrl (not stored in state) — this is a client-side
+    // router, so activeUrl changes on every navigation without this component remounting.
     const activeItem = items.find((item) => item.href === activeUrl || item.items?.some((subItem) => subItem.href === activeUrl));
-    const [currentItem, setCurrentItem] = useState(activeItem);
+    // Tracks a collapsible section the user opened by hand when none of its children are the active route.
+    const [manuallyOpenedItem, setManuallyOpenedItem] = useState<NavItemType>();
 
     return (
         <ul className={cx("flex flex-col px-4 pt-5", className)}>
@@ -29,17 +31,15 @@ export const NavList = ({ activeUrl, items, className }: NavListProps) => {
                 }
 
                 if (item.items?.length) {
+                    const isOpen = activeItem?.href === item.href || manuallyOpenedItem?.href === item.href;
                     return (
                         <details
                             key={item.label}
-                            open={activeItem?.href === item.href}
+                            open={isOpen}
                             className="appearance-none py-0.25"
-                            onToggle={(e) => {
-                                setOpen(e.currentTarget.open);
-                                setCurrentItem(item);
-                            }}
+                            onToggle={(e) => setManuallyOpenedItem(e.currentTarget.open ? item : undefined)}
                         >
-                            <NavItemBase href={item.href} badge={item.badge} icon={item.icon} type="collapsible">
+                            <NavItemBase href={item.href} badge={item.badge} icon={item.icon} type="collapsible" current={activeItem?.href === item.href}>
                                 {item.label}
                             </NavItemBase>
 
@@ -65,14 +65,7 @@ export const NavList = ({ activeUrl, items, className }: NavListProps) => {
 
                 return (
                     <li key={item.label} className="py-px">
-                        <NavItemBase
-                            type="link"
-                            badge={item.badge}
-                            icon={item.icon}
-                            href={item.href}
-                            current={currentItem?.href === item.href}
-                            open={open && currentItem?.href === item.href}
-                        >
+                        <NavItemBase type="link" badge={item.badge} icon={item.icon} href={item.href} current={activeItem?.href === item.href}>
                             {item.label}
                         </NavItemBase>
                     </li>

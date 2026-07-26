@@ -2,23 +2,22 @@ package com.meetingiq.platform.api;
 
 import com.meetingiq.platform.api.dto.DialogDto;
 import com.meetingiq.platform.api.dto.MeetingDto;
+import com.meetingiq.platform.api.dto.MeetingSearchRequestDto;
 import com.meetingiq.platform.api.dto.PageResponse;
 import com.meetingiq.platform.api.dto.SpeakerStatDto;
 import com.meetingiq.platform.api.dto.TranscriptPageDto;
 import com.meetingiq.platform.domain.TranscriptSegment;
-import com.meetingiq.platform.domain.enums.Corpus;
-import com.meetingiq.platform.domain.enums.DatasetSplit;
-import com.meetingiq.platform.domain.enums.MeetingDomain;
 import com.meetingiq.platform.repository.MeetingSearchCriteria;
 import com.meetingiq.platform.service.MeetingService;
 import com.meetingiq.platform.service.TranscriptFormatter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,17 +46,20 @@ public class MeetingController {
         this.transcriptFormatter = transcriptFormatter;
     }
 
-    @GetMapping
-    public PageResponse<MeetingDto> search(
-            @RequestParam(required = false) Corpus corpus,
-            @RequestParam(required = false) MeetingDomain domain,
-            @RequestParam(required = false) DatasetSplit split,
-            @RequestParam(required = false) String speaker,
-            @RequestParam(required = false) String q,
-            @RequestParam(required = false) Integer minSegments,
-            @PageableDefault(size = 20, sort = "_id") Pageable pageable
-    ) {
-        MeetingSearchCriteria criteria = new MeetingSearchCriteria(corpus, domain, split, speaker, q, minSegments);
+    /**
+     * Filterable, paginated listing — a POST body rather than query params
+     * so a client can pass free-text search, filters, pagination and sort
+     * as one JSON object instead of hand-building a query string.
+     */
+    @PostMapping("/search")
+    public PageResponse<MeetingDto> search(@RequestBody(required = false) MeetingSearchRequestDto request) {
+        MeetingSearchRequestDto req = request != null ? request : new MeetingSearchRequestDto(null, null, null, null);
+        MeetingSearchRequestDto.MeetingFilters filters = req.filtersOrEmpty();
+        MeetingSearchCriteria criteria = new MeetingSearchCriteria(
+                filters.corpus(), filters.domain(), filters.split(), filters.speaker(), req.q(),
+                filters.minSegments(), filters.meetingId()
+        );
+        Pageable pageable = SearchRequestSupport.toPageable(req.pagination(), req.sort(), "_id");
         Page<MeetingDto> page = meetingService.search(criteria, pageable);
         return PageResponse.of(page);
     }
